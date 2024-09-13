@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://rxbgd0ygrxbk"]
+
+[ext_resource type="PackedScene" uid="uid://btbb70w8uwc47" path="res://scenes/playerAnimated.tscn" id="2_qbse4"]
+[ext_resource type="PackedScene" uid="uid://j6t6sr2ef8dj" path="res://scenes/spawner.tscn" id="3_5u07y"]
+[ext_resource type="PackedScene" uid="uid://bl3q2ik12dra6" path="res://scenes/kill_zone.tscn" id="4_7t5ro"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6o6x0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ww3q8"]
+sky_material = SubResource("ProceduralSkyMaterial_6o6x0")
+
+[sub_resource type="Environment" id="Environment_r0l8j"]
+background_mode = 2
+sky = SubResource("Sky_ww3q8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_fx0os"]
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_arynj"]
+points = PackedVector3Array(50.7837, 0.543651, 50.7837, -50.7837, -1.04365, -50.7837, -50.7837, 0.543651, -50.7837, 50.7837, -1.04365, -50.7837, -50.7837, -1.04365, 50.7837, -50.7837, 0.543651, 50.7837, 50.7837, 0.543651, -50.7837, 50.7837, -1.04365, 50.7837)
+
+[node name="Level" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r0l8j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_fx0os")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_arynj")
+
+[node name="player" parent="." instance=ExtResource("2_qbse4")]
+
+[node name="spawner" parent="." instance=ExtResource("3_5u07y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88864, -2.38418)
+
+[node name="kill_zone" parent="." instance=ExtResource("4_7t5ro")]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, -4.06603, 0)

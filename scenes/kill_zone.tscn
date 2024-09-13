@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl3q2ik12dra6"]
+
+[ext_resource type="Script" path="res://scripts/kill_zone.gd" id="1_spiuo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s0iea"]
+
+[node name="kill_zone" type="Area3D"]
+script = ExtResource("1_spiuo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_s0iea")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

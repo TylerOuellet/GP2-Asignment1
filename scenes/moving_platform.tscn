@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8w771x46v0ok"]
+
+[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_tcqxb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0n3xv"]
+absorbent = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_54qvv"]
+size = Vector3(4, 0.2, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vejk1"]
+points = PackedVector3Array(2.03175, 0.122173, 2.03175, -2.03175, -0.131696, -2.03175, -2.03175, -0.131696, 2.03175, -2.03175, 0.122173, -2.03175, 2.03175, -0.131696, -2.03175, -2.03175, 0.122173, 2.03175, 2.03175, -0.131696, 2.03175, 2.03175, 0.122173, -2.03175)
+
+[node name="moving_platform" type="AnimatableBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_0n3xv")
+script = ExtResource("1_tcqxb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_54qvv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_vejk1")
